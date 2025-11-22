@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
-import Login from './components/Login';
-import MainPage from './components/MainPage';
-import Register from './components/Register'; // Import the new Register component
+/**
+    * @description      : 
+    * @author           : fortu
+    * @group            : 
+    * @created          : 22/11/2025 - 14:33:08
+    * 
+    * MODIFICATION LOG
+    * - Version         : 1.0.0
+    * - Date            : 22/11/2025
+    * - Author          : fortu
+    * - Modification    : 
+**/
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./components/MainPage";
+import Settings from "./pages/Settings";
+import Library from "./pages/Library";
+import Projects from "./pages/Projects";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
-  const isLoggedIn = localStorage.getItem('userToken');
-  const [showRegister, setShowRegister] = useState(false);
-
-  // This is the main router for the app before a user is logged in.
-  const AuthNavigator = () => {
-    if (showRegister) {
-      // If showRegister is true, display the Register component
-      // We pass setShowRegister so it can navigate back to the login page
-      return <Register setShowRegister={setShowRegister} />;
-    }
-    // Otherwise, show the Login component
-    // We pass setShowRegister so it can navigate to the register page
-    return <Login setShowRegister={setShowRegister} />;
-  };
-
   return (
-    <div className="App">
-      {/* If the user is logged in, show the MainPage.
-        Otherwise, show our AuthNavigator which handles login/register switching.
-      */}
-      {isLoggedIn ? <MainPage /> : <AuthNavigator />}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/library" element={<Library />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
