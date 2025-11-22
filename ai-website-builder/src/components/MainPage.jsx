@@ -1,15 +1,3 @@
-/**
-    * @description      : 
-    * @author           : fortu
-    * @group            : 
-    * @created          : 22/11/2025 - 13:53:59
-    * 
-    * MODIFICATION LOG
-    * - Version         : 1.0.0
-    * - Date            : 22/11/2025
-    * - Author          : fortu
-    * - Modification    : 
-**/
 import React, { useState, useEffect } from 'react';
 import { Wand2, Sparkles, Code, Eye, Plus, MessageSquare, Search, Settings, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 
@@ -33,6 +21,8 @@ const MainPage = () => {
     setPrompt('');
     setGeneratedSite('');
     setShowPreview(false);
+    // In a real app, you would also create a new chat session here
+    console.log("New chat started");
   };
 
   const handleEnhancePrompt = async () => {
@@ -54,7 +44,56 @@ const MainPage = () => {
     
     setTimeout(() => {
       const sampleSite = `
-      <html><body><h1>Generated Site</h1></body></html>`;
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Generated Site</title>
+          <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: 'Montserrat', sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+            header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 0; text-align: center; }
+            h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 700; }
+            .subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+            .cta { background: rgba(255, 255, 255, 0.2); border: 2px solid white; color: white; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 50px; margin-top: 2rem; cursor: pointer; transition: all 0.3s ease; }
+            .cta:hover { background: white; color: #667eea; transform: translateY(-2px); }
+            .features { padding: 6rem 0; background: #f8f9fa; }
+            .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+            .feature { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+            .feature h3 { font-size: 1.5rem; margin-bottom: 1rem; color: #667eea; }
+          </style>
+        </head>
+        <body>
+          <header>
+            <div class="container">
+              <h1>Your Amazing Website</h1>
+              <p class="subtitle">Built with AI-powered technology to deliver exceptional user experiences</p>
+              <button class="cta">Get Started Today</button>
+            </div>
+          </header>
+          <section class="features">
+            <div class="container">
+              <div class="feature-grid">
+                <div class="feature">
+                  <h3>🚀 Fast & Modern</h3>
+                  <p>Built with the latest technologies for optimal performance</p>
+                </div>
+                <div class="feature">
+                  <h3>📱 Responsive</h3>
+                  <p>Perfect viewing experience across all devices</p>
+                </div>
+                <div class="feature">
+                  <h3>🎨 Beautiful Design</h3>
+                  <p>Carefully crafted with attention to every detail</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </body>
+        </html>
+      `;
       setGeneratedSite(sampleSite);
       setIsGenerating(false);
     }, 2000);
@@ -88,15 +127,52 @@ const MainPage = () => {
   }, [isResizing]);
 
   return (
-    <div className="main-page-bg font-montserrat relative flex min-h-screen overflow-hidden bg-black">
-        
-        <div className="absolute inset-0 z-0">
-            <div className="bg-grid-pattern absolute inset-0 opacity-30"></div>
+    <div className="main-page-bg min-h-screen relative flex font-montserrat overflow-hidden">
+        {/* Sidebar
+        <aside className={`bg-black/20 backdrop-blur-lg border-r border-gray-800 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'w-64' : 'w-20'}`}>
+            <div className="p-4 flex items-center justify-between border-b border-gray-800">
+                {isSidebarOpen && <span className="text-xl font-bold text-white">SiteGenie</span>}
+                <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="text-gray-400 hover:text-white">
+                    {isSidebarOpen ? <PanelLeftClose /> : <PanelLeftOpen />}
+                </button>
+            </div>
+            <div className="p-4">
+                <button onClick={handleNewChat} className={`w-full flex items-center gap-2 p-3 rounded-lg text-white transition-colors ${isSidebarOpen ? 'bg-purple-600 hover:bg-purple-500' : 'bg-gray-800 hover:bg-gray-700 justify-center'}`}>
+                    <Plus size={20} />
+                    {isSidebarOpen && <span>New Chat</span>}
+                </button>
+            </div>
+            <nav className="flex-grow p-4 space-y-2">
+                <a href="#" className={`flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-800/50 transition-colors ${!isSidebarOpen && 'justify-center'}`}>
+                    <MessageSquare size={20} />
+                    {isSidebarOpen && <span>History</span>}
+                </a>
+                <a href="#" className={`flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-800/50 transition-colors ${!isSidebarOpen && 'justify-center'}`}>
+                    <Search size={20} />
+                    {isSidebarOpen && <span>Explore</span>}
+                </a>
+            </nav>
+            <div className="p-4 border-t border-gray-800">
+                 <a href="#" className={`flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-800/50 transition-colors ${!isSidebarOpen && 'justify-center'}`}>
+                    <img src="https://placehold.co/40x40/FFFFFF/000000?text=U" alt="User Avatar" className="w-8 h-8 rounded-full" />
+                    {isSidebarOpen && <span>User Profile</span>}
+                </a>
+                 <button onClick={handleLogout} className={`w-full flex items-center gap-3 p-3 rounded-lg text-gray-300 hover:bg-gray-800/50 transition-colors mt-2 ${!isSidebarOpen && 'justify-center'}`}>
+                    <Settings size={20} />
+                    {isSidebarOpen && <span>Logout</span>}
+                </button>
+            </div>
+        </aside> */}
 
-            <div className="animate-blob absolute left-0 top-0 h-96 w-96 rounded-full bg-blue-700/40 blur-3xl"></div>
-            <div className="animate-blob animation-delay-2000 absolute right-0 top-1/2 h-96 w-96 rounded-full bg-blue-500/40 blur-3xl"></div>
-            <div className="animate-blob animation-delay-4000 absolute bottom-0 left-1/4 h-96 w-96 rounded-full bg-blue-400/40 blur-3xl"></div>
-        </div>
+        {/* Main Content Wrapper */}
+        <div className="flex flex-1">
+            {/* Enhanced Background Effects */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
+                <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900/50 rounded-full blur-3xl animate-blob"></div>
+                <div className="absolute top-1/2 right-0 w-96 h-96 bg-pink-900/50 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+                <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-900/50 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+            </div>
 
             <div className="relative z-10 flex h-screen w-full">
                 {/* Main Content Area */}
@@ -132,168 +208,134 @@ const MainPage = () => {
                         Where should we begin?
                         </label>
                         <textarea
-        <div className="relative z-10 flex h-screen w-full">
-
-            <div 
-              className="flex flex-col p-8 transition-all duration-500 ease-in-out"
-              style={{ width: showPreview ? `calc(100% - ${previewWidth}px)` : '100%' }}
-            >
-              <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center">
-
-                <div className="mb-12 text-center">
-
-                  <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-600/20 bg-blue-600/10 px-4 py-2">
-                      <Sparkles className="h-4 w-4 text-blue-400" />
-                      <span className="text-sm font-medium text-blue-300">AI Website Builder</span>
-                  </div>
-
-                  <h1 className="mb-6 text-5xl font-bold leading-tight text-white md:text-6xl">
-                      Your Personal
-                      <br />
-                      <span className="bg-gradient-to-r from-blue-400 to-blue-200 bg-clip-text text-transparent">
-                      AI Website Builder
-                      </span>
-                  </h1>
-
-                  <p className="mx-auto max-w-xl text-lg leading-relaxed text-gray-300 md:text-xl">
-                      Turn ideas into fully generated websites in seconds.
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-
-                  <div className="relative">
-                      <label className="mb-3 block text-sm font-medium text-gray-300">
-                        Describe your website
-                      </label>
-
-                      <textarea
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
-                        placeholder="E.g., Create a dark landing page for a crypto AI tool..."
-                        className="h-32 w-full resize-none rounded-xl border border-gray-700/60 bg-gray-900/60 px-4 py-3 text-white placeholder-gray-500 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                        placeholder="E.g., Create a modern landing page for a tech startup..."
+                        className="w-full h-32 px-4 py-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 resize-none backdrop-blur-sm"
                         disabled={isGenerating}
-                      />
+                        />
+                        <div className="absolute bottom-3 right-3">
+                        <Code className="w-5 h-5 text-gray-500" />
+                        </div>
+                    </div>
 
-                      <div className="absolute bottom-3 right-3">
-                        <Code className="h-5 w-5 text-gray-500" />
-                      </div>
-                  </div>
-
-                  <div className="flex flex-col gap-4 sm:flex-row">
-                      <button
+                    {/* Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <button
                         onClick={handleEnhancePrompt}
                         disabled={!prompt.trim() || isGenerating}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-gray-700/60 bg-gray-900/60 px-6 py-3 text-gray-300 transition-all hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-800/50 border border-gray-600/50 text-gray-300 rounded-xl font-medium hover:bg-gray-700/50 hover:border-gray-500/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed backdrop-blur-sm"
+                        >
                         {isGenerating ? (
-                            <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
+                            <div className="w-5 h-5 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
                         ) : (
-                            <Wand2 className="h-5 w-5" />
+                            <Wand2 className="w-5 h-5" />
                         )}
                         Enhance Prompt
-                      </button>
-                      
-                      <button
+                        </button>
+                        
+                        <button
                         onClick={handleGenerateSite}
                         disabled={!prompt.trim() || isGenerating}
-                        className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-400 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-blue-500 hover:to-blue-300 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-pink-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                        >
                         {isGenerating ? (
-                            <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
-                            <Sparkles className="h-5 w-5" />
+                            <Sparkles className="w-5 h-5" />
                         )}
                         Generate Site
-                      </button>
-                  </div>
+                        </button>
+                    </div>
+                    </div>
+
+                    {/* Status Messages */}
+                    {isGenerating && (
+                    <div className="mt-6 p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
+                        <div className="flex items-center gap-3">
+                        <div className="w-5 h-5 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
+                        <span className="text-purple-300 font-medium">
+                            {showPreview ? 'Generating your website...' : 'Enhancing your prompt...'}
+                        </span>
+                        </div>
+                    </div>
+                    )}
+                </div>
                 </div>
 
-                {isGenerating && (
-                  <div className="mt-6 rounded-xl border border-blue-600/20 bg-blue-600/10 p-4">
-                      <div className="flex items-center gap-3">
-                        <div className="h-5 w-5 animate-spin rounded-full border-2 border-blue-400 border-t-transparent" />
-                        <span className="font-medium text-blue-300">
-                          {showPreview ? 'Generating your website...' : 'Enhancing your prompt...'}
-                        </span>
-                      </div>
-                  </div>
+                {/* Draggable Resizer */}
+                {showPreview && (
+                    <div 
+                        onMouseDown={handleMouseDown}
+                        className="w-2 cursor-col-resize bg-gray-600/50 hover:bg-purple-500 transition-colors duration-200"
+                    ></div>
                 )}
 
-              </div>
-            </div>
-
-            {showPreview && (
+                {/* Preview Area */}
+                {showPreview && (
                 <div 
-                    onMouseDown={handleMouseDown}
-                    className="w-2 cursor-col-resize bg-gray-700 transition-colors hover:bg-blue-500"
-                ></div>
-            )}
-
-            {showPreview && (
-              <div 
-                className="flex flex-col border-l border-gray-700/60 bg-gray-900/60 backdrop-blur-sm"
-                style={{ width: `${previewWidth}px` }}
-              >
-                <div className="flex items-center justify-between border-b border-gray-700/60 p-4">
-
-                  <div className="flex items-center gap-2 rounded-lg border border-gray-700/60 bg-gray-900/80 p-1">
-                      <button 
-                          onClick={() => setPreviewMode('preview')}
-                          className={`px-3 py-1 text-sm rounded-md ${previewMode === 'preview' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800'}`}
-                      >
-                          <Eye className="mr-1 inline h-4 w-4" />
-                          Preview
-                      </button>
-
-                      <button
-                          onClick={() => setPreviewMode('code')}
-                          className={`px-3 py-1 text-sm rounded-md ${previewMode === 'code' ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800'}`}
-                      >
-                          <Code className="mr-1 inline h-4 w-4" />
-                          Code
-                      </button>
-                  </div>
-
-                  <button
-                      onClick={() => setShowPreview(false)}
-                      className="text-2xl text-gray-400 transition-colors hover:text-white"
-                  >
-                      &times;
-                  </button>
+                    className="bg-gray-800/30 backdrop-blur-sm flex flex-col"
+                    style={{ width: `${previewWidth}px` }}
+                >
+                    <div className="p-4 border-b border-gray-600/50 flex items-center justify-between">
+                    <div className="flex items-center gap-2 bg-gray-900/50 p-1 rounded-lg border border-gray-600/50">
+                        <button 
+                            onClick={() => setPreviewMode('preview')}
+                            className={`px-3 py-1 text-sm rounded-md ${previewMode === 'preview' ? 'bg-purple-600 text-white' : 'text-gray-400 hover:bg-gray-700/50'}`}
+                        >
+                            <Eye className="w-4 h-4 inline mr-1" />
+                            Preview
+                        </button>
+                        <button
+                            onClick={() => setPreviewMode('code')}
+                            className={`px-3 py-1 text-sm rounded-md ${previewMode === 'code' ? 'bg-purple-600 text-white' : 'text-gray-400 hover:bg-gray-700/50'}`}
+                        >
+                            <Code className="w-4 h-4 inline mr-1" />
+                            Code
+                        </button>
+                    </div>
+                    <button
+                        onClick={() => setShowPreview(false)}
+                        className="text-gray-400 hover:text-white transition-colors text-2xl"
+                    >
+                        &times;
+                    </button>
+                    </div>
+                    
+                    <div className="flex-1 p-4">
+                    {isGenerating ? (
+                        <div className="flex items-center justify-center h-full">
+                        <div className="text-center">
+                            <div className="w-12 h-12 border-2 border-purple-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                            <p className="text-gray-300">Generating your website...</p>
+                        </div>
+                        </div>
+                    ) : generatedSite ? (
+                        <>
+                        {previewMode === 'preview' ? (
+                            <iframe
+                                srcDoc={generatedSite}
+                                className="w-full h-full bg-white rounded-lg border border-gray-600/50"
+                                title="Generated Website Preview"
+                            />
+                        ) : (
+                            <pre className="w-full h-full bg-gray-900 text-white p-4 rounded-lg overflow-auto text-sm border border-gray-600/50">
+                                <code>{generatedSite.trim()}</code>
+                            </pre>
+                        )}
+                        </>
+                    ) : (
+                        <div className="flex items-center justify-center h-full">
+                        <div className="text-center text-gray-400">
+                            <Code className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                            <p>Your generated website will appear here</p>
+                        </div>
+                        </div>
+                    )}
+                    </div>
                 </div>
-                
-                <div className="flex-1 p-4">
-                  {isGenerating ? (
-                      <div className="flex h-full items-center justify-center">
-                          <div className="text-center">
-                              <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-2 border-blue-400 border-t-transparent" />
-                              <p className="text-gray-300">Generating your website...</p>
-                          </div>
-                      </div>
-                  ) : generatedSite ? (
-                      previewMode === 'preview' ? (
-                          <iframe
-                              srcDoc={generatedSite}
-                              className="h-full w-full rounded-lg border border-gray-700/60 bg-white"
-                              title="Generated Website Preview"
-                          />
-                      ) : (
-                          <pre className="h-full w-full overflow-auto rounded-lg border border-gray-700/60 bg-gray-900 p-4 text-sm text-white">
-                              <code>{generatedSite.trim()}</code>
-                          </pre>
-                      )
-                  ) : (
-                      <div className="flex h-full items-center justify-center">
-                          <div className="text-center text-gray-500">
-                              <Code className="mx-auto mb-4 h-16 w-16 opacity-50" />
-                              <p>Your generated website will appear here</p>
-                          </div>
-                      </div>
-                  )}
-                </div>
-              </div>
-            )}
+                )}
+            </div>
         </div>
     </div>
   );
