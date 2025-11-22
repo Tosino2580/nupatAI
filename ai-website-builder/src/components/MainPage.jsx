@@ -183,29 +183,29 @@ const MainPage = () => {
                 <div className="flex-1 flex flex-col justify-center max-w-2xl mx-auto w-full">
                     {/* Header */}
                     <div className="text-center mb-12">
-                    <div className="inline-flex items-center gap-2 bg-purple-500/10 px-4 py-2 rounded-full border border-purple-500/20 mb-6">
-                        <Sparkles className="w-4 h-4 text-purple-400" />
-                        <span className="text-purple-300 text-sm font-medium">AI-Powered Website Builder</span>
+                    <div className="inline-flex items-center gap-2 bg-blue-600/10 px-4 py-2 rounded-full border border-blue-500/20 mb-6">
+                        <Sparkles className="w-4 h-4 text-blue-400" />
+                        <span className="text-blue-300 text-sm font-medium">AI-Powered Website </span>
                     </div>
                     
                     <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                        Your Personal
-                        <br />
-                        <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                        AI Website Builder
+                       Intelligent. Fast.
+                        
+                        <span className="bg-gradient-to-r ml-2 from-blue-900 via-blue-400 to-blue-800 bg-clip-text text-transparent">
+                        Helpful.
                         </span>
                     </h1>
                     
                     <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl mx-auto">
-                        Transform your ideas into stunning websites in seconds. Just describe what you want, and our AI will build it for you.
+                        Your AI assistant is here to provide insights, suggestions, and solutions instantly  making every task smarter and easier.
                     </p>
                     </div>
 
                     {/* Prompt Input Area */}
                     <div className="space-y-6">
                     <div className="relative">
-                        <label className="block text-sm font-medium text-gray-300 mb-3">
-                        Describe your website
+                        <label className="block text-sm font-medium text-gray-300 mb-3 text-center">
+                        Where should we begin?
                         </label>
                         <textarea
                         value={prompt}
