@@ -1,36 +1,19 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Sparkles } from 'lucide-react';
 
-// We pass 'setShowRegister' as a prop from App.jsx to handle navigation
-const Login = ({ setShowRegister }) => {
-  const [email, setEmail] = useState('');
+const Login = () => {
+  const [phoneOrEmail, setPhoneOrEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError('');
-
-    try {
-      const response = await axios.post('http://localhost:5001/api/users/login', {
-        email: email,
-        password: password,
-      });
-
-      localStorage.setItem('userToken', response.data.token);
-
-      window.location.reload();
-
-    } catch (err) {
-      console.error('Login failed:', err.response ? err.response.data : err.message);
-      setError(err.response?.data?.message || 'An error occurred. Please try again.');
-    }
+    // Save a fake token to simulate login
+    localStorage.setItem('userToken', 'fakeToken123');
+    window.location.reload(); // Refresh to show MainPage
   };
 
   return (
-    <div className="main-page-bg min-h-screen relative flex items-center justify-center font-montserrat overflow-hidden">
-      {/* Enhanced Background Effects */}
+    <div className="main-page-bg min-h-screen flex items-center justify-center font-montserrat relative overflow-hidden">
+      {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-purple-900/50 rounded-full blur-3xl animate-blob"></div>
@@ -39,72 +22,33 @@ const Login = ({ setShowRegister }) => {
       </div>
 
       {/* Login Form */}
-      <div className="relative z-10 w-full max-w-md">
-        <form 
-          onSubmit={handleLogin} 
-          className="flex flex-col justify-center p-8 bg-black/30 backdrop-blur-md rounded-2xl border border-gray-800"
-        >
-          <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 bg-purple-500/10 px-4 py-2 rounded-full border border-purple-500/20 mb-6">
-                <Sparkles className="w-4 h-4 text-purple-400" />
-                <span className="text-purple-300 text-sm font-medium">SiteGenie Login</span>
-              </div>
-              <h1 className="text-4xl font-bold text-white">Welcome Back</h1>
-              <p className="text-gray-400 mt-2">Please enter your credentials to continue.</p>
-          </div>
-          
-          {error && <div className="bg-red-500 text-white p-3 rounded-xl mb-4 text-center">{error}</div>}
-          
-          <div className="space-y-6">
-              <div className="relative">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  className="w-full p-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="relative">
-                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  className="w-full p-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-          </div>
+      <div className="relative z-10 w-full max-w-md p-8 bg-black/30 backdrop-blur-md rounded-2xl border border-gray-800">
+        <h1 className="text-4xl font-bold text-white text-center mb-4">Welcome Back</h1>
+        <p className="text-gray-400 text-center mb-8">Login with any details to access the app</p>
 
-          <div className="flex justify-between items-center w-full py-4 text-sm">
-            <div className="flex items-center">
-              <input type="checkbox" name="ch" id="ch" className="mr-2 h-4 w-4 bg-gray-700 border-gray-600 rounded text-purple-500 focus:ring-purple-500/50" />
-              <span className="text-gray-300">Remember me</span>
-            </div>
-            <a href="#" className="font-medium text-purple-400 hover:underline">Forgot password?</a>
-          </div>
-          
+        <form onSubmit={handleLogin} className="flex flex-col gap-6">
+          <input
+            type="text"
+            placeholder="Phone or Email"
+            value={phoneOrEmail}
+            onChange={(e) => setPhoneOrEmail(e.target.value)}
+            className="w-full p-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full p-3 bg-gray-800/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 backdrop-blur-sm"
+            required
+          />
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-pink-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+            className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-500 hover:to-pink-500 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
-            Sign In
+            Login
           </button>
-          
-          <div className="text-center text-gray-400 mt-6 text-sm">
-            Don't have an account?
-            <button type="button" onClick={() => setShowRegister(true)} className="font-medium text-purple-400 hover:underline ml-1 bg-transparent border-none">
-              Sign up for free
-            </button>
-          </div>
         </form>
       </div>
     </div>
