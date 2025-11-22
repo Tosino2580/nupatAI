@@ -36,7 +36,7 @@ const Sidebar = ({
       <div className="flex items-center justify-between border-b border-gray-800 p-4">
         {isSidebarOpen && (
           <span className="text-xl font-bold tracking-wide text-white">
-            NonaAI
+            NupatAI
           </span>
         )}
 

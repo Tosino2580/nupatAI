@@ -153,7 +153,7 @@ const MainPage = () => {
               </h1>
 
               <p className="mx-auto max-w-xl text-lg text-gray-300 md:text-xl">
-                Ask anything. Your assistant delivers insights instantly.
+                Your AI assistant is here to provide insights, suggestions, and solutions instantly – making every task smarter and easier.
               </p>
             </div>
 
