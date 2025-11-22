@@ -1,3 +1,15 @@
+/**
+    * @description      : 
+    * @author           : fortu
+    * @group            : 
+    * @created          : 22/11/2025 - 13:32:31
+    * 
+    * MODIFICATION LOG
+    * - Version         : 1.0.0
+    * - Date            : 22/11/2025
+    * - Author          : fortu
+    * - Modification    : 
+**/
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel');
